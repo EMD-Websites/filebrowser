@@ -38,6 +38,10 @@ func Search(fs afero.Fs, scope, query string, checker rules.Checker, found func(
 			return nil
 		}
 
+		if scope == "/" && len(strings.Split(fPath, "/")) > 2 {
+			return filepath.SkipDir
+		}
+
 		if len(search.Conditions) > 0 {
 			match := false
 
